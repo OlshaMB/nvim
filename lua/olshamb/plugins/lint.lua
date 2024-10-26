@@ -8,7 +8,7 @@ return {
 			typescript = { "biome" },
 			typescriptreact = { "biome" },
 			css = { "biome" },
-			html = { "biome" },
+			html = { "prettier" },
 			json = { "biome" },
 			jsonc = { "biome" },
 		}
