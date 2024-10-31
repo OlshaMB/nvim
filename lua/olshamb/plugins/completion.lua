@@ -1,43 +1,47 @@
 return {
-	"hrsh7th/nvim-cmp",
-	event = "InsertEnter",
-	dependencies = {
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"saadparwaiz1/cmp_luasnip",
-		{
-			"L3MON4D3/LuaSnip",
-			version = "v2.*",
-			build = "make install_jsregexp",
+	{
+		"saghen/blink.cmp",
+		lazy = false,
+		dependencies = "rafamadriz/friendly-snippets",
+
+		version = "v0.*",
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			keymap = {
+				["<C-space>"] = {
+					"show",
+					"show_documentation",
+					"hide_documentation",
+				},
+				["<A-k>"] = { "select_prev", "fallback" },
+				["<A-j>"] = { "select_next", "fallback" },
+				["<A-b>"] = { "scroll_documentation_up", "fallback" },
+				["<A-f>"] = {
+					"scroll_documentation_down",
+					"fallback",
+				},
+				["<Tab>"] = { "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "snippet_backward", "fallback" },
+				["<C-e>"] = { "hide" },
+				["<CR>"] = { "select_and_accept", "fallback" },
+			},
+
+			highlight = {
+				use_nvim_cmp_as_default = true,
+			},
+			nerd_font_variant = "mono",
+
+			-- experimental auto-brackets support
+			accept = { auto_brackets = { enabled = true } },
+
+			-- experimental signature help support
+			trigger = { signature_help = { enabled = true } },
+			windows = {
+				autocomplete = {
+					selection = "manual",
+				},
+			},
 		},
 	},
-	config = function()
-		local cmp = require("cmp")
-		local luasnip = require("luasnip")
-		cmp.setup({
-			completion = {
-				completeopt = "menu,menuone,preview,noselect",
-			},
-			snippet = {
-				expand = function(args)
-					luasnip.lsp_expand(args.body)
-				end,
-			},
-			mapping = cmp.mapping.preset.insert({
-				["<A-k>"] = cmp.mapping.select_prev_item(),
-				["<A-j>"] = cmp.mapping.select_next_item(),
-				["<A-b>"] = cmp.mapping.scroll_docs(-4),
-				["<A-f>"] = cmp.mapping.scroll_docs(4),
-				["<A-e>"] = cmp.mapping.abort(),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<CR>"] = cmp.mapping.confirm({ select = false }),
-			}),
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
-				{ name = "buffer" },
-				{ name = "path" },
-			}),
-		})
-	end,
 }
