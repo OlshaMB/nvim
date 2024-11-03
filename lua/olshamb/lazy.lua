@@ -26,6 +26,6 @@ require("lazy").setup({
 	spec = {
 		{ import = "olshamb.plugins" },
 	},
-	install = { colorscheme = { "rose-pine" } },
+	install = { colorscheme = { "mellow" } },
 	checker = { enabled = true },
 })
