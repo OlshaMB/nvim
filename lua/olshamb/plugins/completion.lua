@@ -8,39 +8,38 @@ return {
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
-			keymap = {
-				["<C-space>"] = {
-					"show",
-					"show_documentation",
-					"hide_documentation",
-				},
-				["<A-k>"] = { "select_prev", "fallback" },
-				["<A-j>"] = { "select_next", "fallback" },
-				["<A-b>"] = { "scroll_documentation_up", "fallback" },
-				["<A-f>"] = {
-					"scroll_documentation_down",
-					"fallback",
-				},
-				["<Tab>"] = { "snippet_forward", "fallback" },
-				["<S-Tab>"] = { "snippet_backward", "fallback" },
-				["<C-e>"] = { "hide" },
-				["<CR>"] = { "select_and_accept", "fallback" },
-			},
+			keymap = { preset = "enter" },
 
-			highlight = {
+			appearance = {
+				-- Sets the fallback highlight groups to nvim-cmp's highlight groups
+				-- Useful for when your theme doesn't support blink.cmp
+				-- will be removed in a future release
 				use_nvim_cmp_as_default = true,
+				-- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- Adjusts spacing to ensure icons are aligned
+				nerd_font_variant = "mono",
 			},
-			nerd_font_variant = "mono",
 
-			-- experimental auto-brackets support
-			accept = { auto_brackets = { enabled = true } },
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+				-- optionally disable cmdline completions
+				-- cmdline = {},
+			},
 
-			-- experimental signature help support
-			trigger = { signature_help = { enabled = true } },
-			windows = {
-				autocomplete = {
-					selection = "manual",
+			completion = {
+				keyword = {
+					range = "full",
 				},
+				ghost_text = {
+					enabled = false,
+				},
+				documentation = {
+					auto_show = true,
+				},
+			},
+
+			signature = {
+				enabled = true,
 			},
 		},
 	},
