@@ -11,6 +11,7 @@ return {
 			html = { "prettier" },
 			json = { "biome" },
 			jsonc = { "biome" },
+			yaml = { "yamlfmt" },
 		},
 		format_on_save = {
 			-- These options will be passed to conform.format()

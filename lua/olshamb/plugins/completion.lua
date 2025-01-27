@@ -1,14 +1,20 @@
 return {
 	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		config = true,
+	},
+	{
 		"saghen/blink.cmp",
-		lazy = false,
 		dependencies = "rafamadriz/friendly-snippets",
 
-		version = "v0.*",
+		version = "*",
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
-			keymap = { preset = "enter" },
+			keymap = {
+				preset = "super-tab",
+			},
 
 			appearance = {
 				-- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -21,7 +27,20 @@ return {
 			},
 
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = {
+					"lazydev",
+					"lsp",
+					"path",
+					"snippets",
+					"buffer",
+				},
+				providers = {
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						score_offset = 100,
+					},
+				},
 				-- optionally disable cmdline completions
 				-- cmdline = {},
 			},

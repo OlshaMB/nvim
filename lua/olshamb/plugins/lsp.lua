@@ -35,7 +35,6 @@ return {
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"nvim-telescope/telescope.nvim",
-			{ "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
 			local lspconfig = require("lspconfig")
@@ -121,6 +120,13 @@ return {
 						"n",
 						"gt",
 						telescope.lsp_type_definitions,
+						opts
+					)
+					opts.desc = "LSP Workspace"
+					vim.keymap.set(
+						"n",
+						"<leader>ws",
+						telescope.lsp_dynamic_workspace_symbols,
 						opts
 					)
 				end,

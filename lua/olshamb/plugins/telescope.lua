@@ -10,7 +10,16 @@ return {
 			},
 		},
 		config = function()
-			require("telescope").setup({
+			local telescope = require("telescope")
+			telescope.setup({
+				pickers = {
+					lsp_dynamic_workspace_symbols = {
+						sorter = telescope.extensions.fzf.native_fzf_sorter({
+							fuzzy = true,
+							case_mode = "smart_case",
+						}),
+					},
+				},
 				extensions = {
 					smart_open = {
 						match_algorithm = "fzf",
