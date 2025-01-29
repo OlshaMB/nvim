@@ -1,19 +1,19 @@
-local ensure_installed = {
-	"ts_ls",
-	"cssls",
-	"html",
-	"jsonls",
-	"lua_ls",
-}
-return {
-	{
+local plugins = {}
+local dependencies = {}
+if vim.g.olshamb_mason_enabled then
+	table.insert(dependencies, "williamboman/mason-lspconfig.nvim")
+	table.insert(plugins, {
 		"williamboman/mason.nvim",
-		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
-		},
+		dependencies = dependencies,
 		config = function()
 			local mason = require("mason")
-
+			local ensure_installed = {
+				"ts_ls",
+				"cssls",
+				"html",
+				"jsonls",
+				"lua_ls",
+			}
 			local mason_lspconfig = require("mason-lspconfig")
 			mason.setup({
 				ui = {
@@ -28,18 +28,16 @@ return {
 				ensure_installed = ensure_installed,
 			})
 		end,
-	},
-	{
+	})
+end
+table.insert(dependencies, "folke/snacks.nvim")
+table.insert(plugins, {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
+		dependencies = dependencies,
 		config = function()
 			local lspconfig = require("lspconfig")
 			local mason_lspconfig = require("mason-lspconfig")
-			local telescope = require("telescope.builtin")
 
 			vim.keymap.set(
 				"n",
@@ -95,7 +93,7 @@ return {
 					vim.keymap.set(
 						"n",
 						"gR",
-						telescope.lsp_references,
+						Snacks.picker.lsp_references,
 						opts
 					)
 
@@ -103,7 +101,7 @@ return {
 					vim.keymap.set(
 						"n",
 						"gd",
-						telescope.lsp_definitions,
+						Snacks.picker.lsp_definitions,
 						opts
 					)
 
@@ -111,7 +109,7 @@ return {
 					vim.keymap.set(
 						"n",
 						"gi",
-						telescope.lsp_implementations,
+						Snacks.picker.lsp_implementations,
 						opts
 					)
 
@@ -119,14 +117,14 @@ return {
 					vim.keymap.set(
 						"n",
 						"gt",
-						telescope.lsp_type_definitions,
+						Snacks.picker.lsp_type_definitions,
 						opts
 					)
 					opts.desc = "LSP Workspace"
 					vim.keymap.set(
 						"n",
 						"<leader>ws",
-						telescope.lsp_dynamic_workspace_symbols,
+						Snacks.picker.lsp_workspace_symbols,
 						opts
 					)
 				end,
@@ -139,5 +137,6 @@ return {
 				end,
 			})
 		end,
-	},
-}
+	}
+)
+return plugins

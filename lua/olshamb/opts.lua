@@ -1,3 +1,4 @@
+vim.opt.termguicolors = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -25,3 +26,5 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 
 vim.opt.laststatus = 3
+
+vim.g.olshamb_mason_enabled = true
