@@ -1,3 +1,4 @@
+---@module "snacks"
 return {
 	{
 		"folke/snacks.nvim",
@@ -28,6 +29,17 @@ return {
 					Snacks.picker.files()
 				end,
 				desc = "Find Files",
+			},
+			{
+				"<leader>fe",
+				function()
+					Snacks.picker.explorer({
+						layout = {
+							preset = "default",
+							preview = true,
+						},
+					})
+				end,
 			},
 			{
 				"<leader>fG",
