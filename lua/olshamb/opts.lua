@@ -12,6 +12,8 @@ end)
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.opt.incsearch = true
+
 vim.opt.updatetime = 250
 
 vim.opt.splitright = true
@@ -28,3 +30,14 @@ vim.opt.softtabstop = 2
 vim.opt.laststatus = 3
 
 vim.g.olshamb_mason_enabled = true
+
+vim.filetype.add({
+	extension = {
+		gotmpl = "gotmpl",
+	},
+	pattern = {
+		[".*/templates/.*%.tpl"] = "helm",
+		[".*/templates/.*%.ya?ml"] = "helm",
+		["helmfile.*%.ya?ml"] = "helm",
+	},
+})

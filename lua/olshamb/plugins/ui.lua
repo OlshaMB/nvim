@@ -54,6 +54,13 @@ return {
 				end,
 				desc = "Grep",
 			},
+			{
+				"<leader>nt",
+				function()
+					Snacks.picker.notifications()
+				end,
+				desc = "Notifications",
+			},
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("User", {
