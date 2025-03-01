@@ -226,7 +226,7 @@ return {
 				n_completions = 1,
 				context_window = 16384,
 				request_timeout = 360,
-				notify = "debug",
+				--				notify = "debug",
 				provider_options = {
 					openai_fim_compatible = {
 						name = "Ollama",
